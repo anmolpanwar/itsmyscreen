@@ -19,8 +19,19 @@
       --muted: rgba(255,255,255,0.70);
       --faint: rgba(255,255,255,0.52);
       --line: rgba(255,255,255,0.12);
-      --accent: #7CFF6B;
-      --accent2:#86A8FF;
+
+      /* Unified RED scheme */
+      --accent: #ff2a2a;
+      --accentFaint: rgba(255,42,42,0.12);
+      --accentSoft: rgba(255,42,42,0.22);
+      --accentBorder: rgba(255,42,42,0.45);
+
+      /* Hero theme variables (red) */
+      --red: #ff2a2a;
+      --shadowHero: 0 22px 70px rgba(0,0,0,0.55);
+      --radiusHero: 26px;
+      --ease: cubic-bezier(.2,.85,.2,1);
+
       --shadow: 0 16px 50px rgba(0,0,0,0.45);
       --radius: 18px;
       --radius2: 26px;
@@ -32,11 +43,14 @@
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+
+      /* CHANGED: background accents to RED only (was green+blue) */
       background:
-        radial-gradient(900px 620px at 15% 10%, rgba(124,255,107,0.14), transparent 55%),
-        radial-gradient(900px 620px at 85% 15%, rgba(134,168,255,0.14), transparent 55%),
+        radial-gradient(900px 620px at 15% 10%, rgba(255,42,42,0.14), transparent 55%),
+        radial-gradient(900px 620px at 85% 15%, rgba(255,42,42,0.12), transparent 55%),
         radial-gradient(700px 500px at 50% 90%, rgba(255,255,255,0.06), transparent 60%),
         var(--bg);
+
       color: var(--text);
       overflow-x:hidden;
     }
@@ -64,10 +78,13 @@
     .logo{
       width: 34px; height: 34px;
       border-radius: 12px;
+
+      /* CHANGED: logo accents to RED only (was green+blue) */
       background:
-        radial-gradient(16px 16px at 32% 30%, rgba(124,255,107,0.95), transparent 60%),
-        radial-gradient(18px 18px at 72% 70%, rgba(134,168,255,0.92), transparent 62%),
+        radial-gradient(16px 16px at 32% 30%, rgba(255,42,42,0.95), transparent 60%),
+        radial-gradient(18px 18px at 72% 70%, rgba(255,42,42,0.80), transparent 62%),
         rgba(255,255,255,0.08);
+
       border: 1px solid rgba(255,255,255,0.14);
       box-shadow: var(--shadow);
     }
@@ -93,134 +110,151 @@
     .pill:hover{ transform: translateY(-1px); background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.22); }
     .dot{
       width:8px; height:8px; border-radius:50%;
+
+      /* CHANGED: dot to RED (was green) */
       background: var(--accent);
-      box-shadow: 0 0 0 6px rgba(124,255,107,0.10);
+      box-shadow: 0 0 0 6px var(--accentFaint);
     }
 
-    /* Hero */
-    .hero{ padding: 56px 0 20px; position:relative; }
-    .heroGrid{
-      display:grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 18px;
-      align-items: stretch;
-    }
-    @media (max-width: 920px){ .heroGrid{ grid-template-columns: 1fr; } }
+    /* -------- HERO (background image hero) -------- */
+    main{ padding-bottom: 34px; }
 
-    .card{
-      border-radius: var(--radius2);
-      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
-      border: 1px solid rgba(255,255,255,0.14);
-      box-shadow: var(--shadow);
+    .hero{
+      padding: 28px 0 20px;
+    }
+
+    .heroBgCard{
+      margin-top: 20px;
+      border-radius: var(--radiusHero);
       overflow:hidden;
-    }
-    .pad{ padding: 28px; }
-
-    .kicker{
-      display:inline-flex; align-items:center; gap:10px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(124,255,107,0.10);
-      border: 1px solid rgba(124,255,107,0.22);
-      font-size: 13px;
-      margin-bottom: 14px;
-    }
-    .kicker b{ color: var(--accent); }
-
-    h1{
-      margin:0 0 10px;
-      font-size: clamp(34px, 4.2vw, 56px);
-      line-height: 1.03;
-      letter-spacing: -0.035em;
-    }
-    .sub{
-      margin:0 0 18px;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.65;
-      max-width: 62ch;
-    }
-
-    .ctaRow{ display:flex; flex-wrap:wrap; gap: 12px; align-items:center; }
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding: 12px 16px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.16);
-      background: rgba(255,255,255,0.06);
-      color: var(--text);
-      font-weight: 650;
-      cursor:pointer;
-      transition: transform 120ms ease, background 120ms ease, border 120ms ease;
-      user-select:none;
-    }
-    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.24); }
-    .btn.primary{
-      background: linear-gradient(90deg, rgba(124,255,107,0.22), rgba(134,168,255,0.18));
-      border-color: rgba(124,255,107,0.34);
-    }
-    .btn.primary:hover{ border-color: rgba(124,255,107,0.55); }
-
-    .tiny{ margin-top: 12px; font-size: 12px; color: var(--faint); line-height: 1.6; }
-    .tiny b{ color: rgba(255,255,255,0.86); }
-
-    .sep{ height:1px; background: var(--line); margin: 16px 0; }
-
-    /* Right-side “no-image” mock */
-    .mock{
+      min-height: 560px;
       position: relative;
-      min-height: 420px;
-      padding: 18px;
-      background:
-        radial-gradient(260px 220px at 25% 22%, rgba(124,255,107,0.18), transparent 60%),
-        radial-gradient(320px 260px at 75% 20%, rgba(134,168,255,0.18), transparent 60%),
-        radial-gradient(520px 420px at 50% 90%, rgba(255,255,255,0.06), transparent 70%),
-        rgba(255,255,255,0.03);
-      border-radius: var(--radius2);
-      border: 1px solid rgba(255,255,255,0.14);
-      box-shadow: var(--shadow);
-      overflow:hidden;
+      box-shadow: var(--shadowHero);
+      border: 1px solid rgba(255,255,255,0.12);
+      background: url("hero-bg.png") center/cover no-repeat;
     }
-    .mock::after{
+
+    .heroBgCard::before{
       content:"";
       position:absolute;
-      inset:-2px;
-      background: linear-gradient(120deg, rgba(124,255,107,0.12), transparent 30%, rgba(134,168,255,0.10));
+      inset:0;
+
+      /* CHANGED: red overlay slightly stronger (still red-only) */
+      background:
+        linear-gradient(90deg,
+          rgba(0,0,0,0.78) 0%,
+          rgba(0,0,0,0.60) 38%,
+          rgba(0,0,0,0.30) 60%,
+          rgba(0,0,0,0.10) 100%),
+        radial-gradient(900px 600px at 20% 30%, rgba(255,42,42,0.22), transparent 60%);
+
       pointer-events:none;
-      opacity: 0.65;
-      mask-image: radial-gradient(circle at 50% 20%, black, transparent 60%);
     }
-    .glass{
-      border-radius: 18px;
-      background: rgba(7,8,12,0.58);
-      border: 1px solid rgba(255,255,255,0.14);
-      backdrop-filter: blur(10px);
-      padding: 14px;
+
+    .heroInner{
       position: relative;
       z-index: 2;
+      height: 100%;
+      padding: 42px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 26px;
     }
-    .glass + .glass{ margin-top: 12px; }
-    .miniTitle{ display:flex; align-items:center; justify-content:space-between; gap:10px; font-weight: 700; letter-spacing:-0.01em; }
-    .badge{
-      font-size: 12px;
-      padding: 6px 10px;
+
+    @media (max-width: 860px){
+      .heroBgCard{ min-height: 520px; }
+      .heroInner{ padding: 26px; }
+    }
+
+    .heroLeft{
+      max-width: 620px;
+    }
+
+    .heroBadge{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      padding: 10px 14px;
       border-radius: 999px;
-      background: rgba(124,255,107,0.12);
-      border: 1px solid rgba(124,255,107,0.22);
-      color: rgba(255,255,255,0.88);
-      white-space:nowrap;
+      background: rgba(255,42,42,0.14);
+      border: 1px solid rgba(255,42,42,0.35);
+      color: rgba(255,255,255,0.90);
+      font-weight: 850;
+      letter-spacing: 0.02em;
+      margin-bottom: 16px;
+      user-select:none;
     }
-    .miniText{ margin-top: 8px; color: var(--muted); font-size: 13px; line-height: 1.55; }
-    .chips{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
-    .chip{
+
+    .heroDot{
+      width: 8px; height: 8px;
+      border-radius: 999px;
+      background: var(--red);
+      box-shadow: 0 0 0 6px rgba(255,42,42,0.14);
+    }
+
+    .heroTitle{
+      margin: 0 0 14px;
+      font-size: clamp(44px, 5.4vw, 84px);
+      line-height: 0.92;
+      letter-spacing: -0.05em;
+    }
+
+    .heroSub{
+      margin: 0 0 18px;
+      color: rgba(255,255,255,0.78);
+      font-size: 16px;
+      line-height: 1.65;
+      max-width: 60ch;
+    }
+
+    .heroActions{
+      display:flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items:center;
+      margin-top: 6px;
+    }
+
+    .heroBtn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      padding: 12px 16px;
       border-radius: 14px;
-      padding: 10px 12px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      font-size: 12px;
-      color: rgba(255,255,255,0.86);
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.92);
+      font-weight: 850;
+      cursor:pointer;
+      transition: transform 140ms var(--ease), background 140ms var(--ease), border 140ms var(--ease);
+      user-select:none;
     }
-    @media (max-width: 520px){ .chips{ grid-template-columns: 1fr; } }
+    .heroBtn:hover{ transform: translateY(-1px); background: rgba(255,255,255,0.10); border-color: rgba(255,255,255,0.26); }
+    .heroBtn.primary{
+      background: rgba(255,42,42,0.20);
+      border-color: rgba(255,42,42,0.45);
+      box-shadow: 0 20px 55px rgba(255,42,42,0.12);
+    }
+    .heroBtn.primary:hover{
+      background: rgba(255,42,42,0.24);
+      border-color: rgba(255,42,42,0.65);
+    }
+
+    .heroTiny{
+      margin-top: 14px;
+      color: rgba(255,255,255,0.60);
+      font-size: 12px;
+      line-height: 1.6;
+      max-width: 70ch;
+    }
+
+    @media (max-width: 640px){
+      .heroInner{ padding: 22px; }
+      .heroTitle{ font-size: 46px; }
+    }
+    /* -------- END HERO -------- */
 
     /* Sections */
     section{ padding: 22px 0; }
@@ -267,8 +301,10 @@
       display:inline-grid;
       place-items:center;
       margin-bottom: 10px;
-      background: linear-gradient(180deg, rgba(124,255,107,0.14), rgba(134,168,255,0.10));
-      border: 1px solid rgba(255,255,255,0.14);
+
+      /* CHANGED: icon background to RED only (was green+blue gradient) */
+      background: rgba(255,42,42,0.14);
+      border: 1px solid rgba(255,42,42,0.30);
     }
     .icon svg{ width: 18px; height: 18px; opacity: 0.92; }
 
@@ -316,7 +352,12 @@
       outline:none;
     }
     input[type="email"]::placeholder{ color: rgba(255,255,255,0.45); }
-    input[type="email"]:focus{ border-color: rgba(124,255,107,0.45); box-shadow: 0 0 0 6px rgba(124,255,107,0.10); }
+
+    /* CHANGED: focus ring to RED (was green) */
+    input[type="email"]:focus{
+      border-color: rgba(255,42,42,0.55);
+      box-shadow: 0 0 0 6px rgba(255,42,42,0.12);
+    }
 
     .note{ font-size: 13px; color: var(--muted); line-height: 1.6; margin: 10px 0 0; }
     .fineprint{ font-size: 12px; color: var(--faint); line-height: 1.6; margin: 10px 0 0; }
@@ -382,80 +423,27 @@
   </header>
 
   <main id="top" class="wrap">
-    <!-- HERO -->
-    <section class="hero">
-      <div class="heroGrid">
-        <div class="card pad">
-          <div class="kicker"><b>Coming soon</b> • Digital billboards, booked like a ride</div>
-          <h1>Book a digital billboard like you book an Uber.</h1>
-          <p class="sub">
-            Browse screens, pick time slots, upload your creative, pay, and your campaign can be live fast.
-            <span style="color:var(--faint)">(We’re trying to delete the “Excel + WhatsApp” era.)</span>
-          </p>
+    <!-- HERO (REPLACED) -->
+    <section class="hero" aria-label="Hero">
+      <div class="heroBgCard">
+        <div class="heroInner">
+          <div class="heroLeft">
+            <div class="heroBadge"><span class="heroDot"></span> COMING SOON</div>
 
-          <div class="ctaRow">
-            <a class="btn primary" href="#waitlist" aria-label="Join the waitlist">
-              Join the waitlist <span aria-hidden="true">→</span>
-            </a>
-            <button class="btn" id="copyEmailBtn" type="button" aria-label="Copy contact email">
-              Contact: hello@itsmyscreen.com
-            </button>
-          </div>
+            <h1 class="heroTitle">Find. Upload.<br/>Pay. Go Live.</h1>
 
-          <div class="sep"></div>
-          <p class="tiny">
-            <b>Honest disclaimer:</b> “Live in 15 minutes” depends on screen/operator readiness and creative checks.
-            We’re building for speed, not lying to reality.
-          </p>
-        </div>
+            <p class="heroSub">
+              Book digital billboards like you book an Uber. <br> Pick a screen, upload your media, pay, and launch.
+            </p>
 
-        <!-- No-image product mock -->
-        <div class="mock" aria-label="Product preview (stylized)">
-          <div class="glass">
-            <div class="miniTitle">
-              <span>Find screens near you</span>
-              <span class="badge">Available slots</span>
+            <div class="heroActions">
+              <a class="heroBtn primary" href="#waitlist">Join waitlist →</a>
+              <button class="heroBtn" id="copyEmailBtnHero" type="button">hello@itsmyscreen.com</button>
             </div>
-            <div class="miniText">
-              Filter by city, landmark, audience density, and budget. See pricing before you pay.
-            </div>
-            <div class="chips" aria-hidden="true">
-              <div class="chip">📍 High-footfall</div>
-              <div class="chip">⏱ Hourly slots</div>
-              <div class="chip">🧾 Clear invoices</div>
-            </div>
-          </div>
 
-          <div class="glass">
-            <div class="miniTitle">
-              <span>Upload → Pay → Go live</span>
-              <span class="badge">Fast launch</span>
+            <div class="heroTiny">
+              Note: launch speed depends on screen/operator readiness and creative checks.
             </div>
-            <div class="miniText">
-              Upload your creative, we run quick checks, and your campaign starts—without the spreadsheet Olympics.
-            </div>
-          </div>
-
-          <!-- Tiny “map” doodle (SVG) -->
-          <div class="glass" style="margin-top:12px;">
-            <div class="miniTitle"><span>Live preview</span><span class="badge" style="background:rgba(134,168,255,0.12); border-color:rgba(134,168,255,0.22);">Near you</span></div>
-            <svg viewBox="0 0 720 180" width="100%" height="110" aria-hidden="true" style="margin-top:10px; border-radius:14px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.10);">
-              <defs>
-                <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stop-color="rgba(124,255,107,0.55)"/>
-                  <stop offset="1" stop-color="rgba(134,168,255,0.55)"/>
-                </linearGradient>
-              </defs>
-              <path d="M20,140 C120,40 220,170 320,80 C420,10 520,160 700,40"
-                    fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="6" stroke-linecap="round"/>
-              <circle cx="160" cy="92" r="10" fill="url(#g)"/>
-              <circle cx="360" cy="92" r="10" fill="url(#g)"/>
-              <circle cx="560" cy="92" r="10" fill="url(#g)"/>
-              <rect x="138" y="40" width="46" height="28" rx="10" fill="rgba(124,255,107,0.16)" stroke="rgba(124,255,107,0.28)"/>
-              <rect x="338" y="116" width="46" height="28" rx="10" fill="rgba(134,168,255,0.14)" stroke="rgba(134,168,255,0.26)"/>
-              <rect x="538" y="40" width="46" height="28" rx="10" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.14)"/>
-            </svg>
-            <div class="miniText">This is a stylized mock. Real screens + availability will appear here at launch.</div>
           </div>
         </div>
       </div>
@@ -582,8 +570,9 @@
           <div style="
             position:absolute; right:-90px; bottom:-90px;
             width:260px; height:260px; border-radius: 999px;
-            background: radial-gradient(circle at 30% 30%, rgba(124,255,107,0.22), transparent 60%),
-                        radial-gradient(circle at 60% 70%, rgba(134,168,255,0.20), transparent 62%);
+            /* CHANGED: blob accents to RED only (was green+blue) */
+            background: radial-gradient(circle at 30% 30%, rgba(255,42,42,0.22), transparent 60%),
+                        radial-gradient(circle at 60% 70%, rgba(255,42,42,0.18), transparent 62%);
           " aria-hidden="true"></div>
         </div>
       </div>
@@ -643,7 +632,7 @@
 
     <!-- Final CTA -->
     <section>
-      <div class="card pad" style="text-align:center;">
+      <div class="box" style="border-radius: var(--radius2); text-align:center;">
         <p class="sectionTitle" style="margin-bottom:8px;">Ready?</p>
         <h2 style="margin:0 0 10px;">Make your first billboard feel… normal.</h2>
         <p class="lead" style="margin:0 auto 14px;">
@@ -682,18 +671,21 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    const copyBtn = document.getElementById("copyEmailBtn");
-    copyBtn.addEventListener("click", async () => {
-      const email = "hello@itsmyscreen.com";
-      try {
-        await navigator.clipboard.writeText(email);
-        const prev = copyBtn.textContent;
-        copyBtn.textContent = "Copied ✓";
-        setTimeout(() => (copyBtn.textContent = prev), 1200);
-      } catch (e) {
-        window.location.href = "mailto:" + email;
-      }
-    });
+    // Hero email copy button
+    const copyHero = document.getElementById("copyEmailBtnHero");
+    if (copyHero) {
+      copyHero.addEventListener("click", async () => {
+        const email = "hello@itsmyscreen.com";
+        try {
+          await navigator.clipboard.writeText(email);
+          const prev = copyHero.textContent;
+          copyHero.textContent = "Copied ✓";
+          setTimeout(() => (copyHero.textContent = prev), 1100);
+        } catch (e) {
+          window.location.href = "mailto:" + email;
+        }
+      });
+    }
 
     function handleWaitlist(ev){
       ev.preventDefault();
